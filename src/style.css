@@ -1,0 +1,64 @@
+/* Reset start */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 400px;
+    min-width: 100px;
+    height: auto;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+/* Reset end */
+
+.breed-select {
+    margin: 20px;
+}
+
+.cat-info {
+    padding: 0 20;
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+max-width: 600px;
+padding: 20px;
+}
+
+.card-name {
+    margin-bottom: 20px;
+}
+
+.card-desc {
+    margin-bottom: 20px;
+}
+
+.card-temp-title {
+    font-weight: bold;
+}
+
