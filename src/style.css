@@ -34,31 +34,3 @@ button {
     cursor: pointer;
 }
 /* Reset end */
-
-.breed-select {
-    margin: 20px;
-}
-
-.cat-info {
-    padding: 0 20;
-    display: flex;
-    gap: 20px;
-}
-
-.card {
-max-width: 600px;
-padding: 20px;
-}
-
-.card-name {
-    margin-bottom: 20px;
-}
-
-.card-desc {
-    margin-bottom: 20px;
-}
-
-.card-temp-title {
-    font-weight: bold;
-}
-
