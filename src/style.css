@@ -54,6 +54,8 @@ button {
 
    border-style: none;
    border-radius: 4px;
+
+    outline: none;
 }
 
 .submit-btn {
