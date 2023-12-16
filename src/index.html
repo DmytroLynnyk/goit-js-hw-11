@@ -14,16 +14,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form id="search-form">
-      <input
-        type="text"
-        placeholder="Search images..."
-        class="input"
-        name="search-input"
-        autofocus="'true"
-      />
-    </form>
-
+    <header class="header">
+      <div class="container">
+        <form class="search-form" id="search-form">
+          <input
+            type="text"
+            name="searchQuery"
+            autocomplete="off"
+            placeholder="Search images..."
+          />
+          <button type="submit" class="submit-btn">
+            <svg class="search-icon" width="16" height="16">
+              <use href="./icons.svg#search-icon"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </header>
+    <main></main>
     <script src="index.js" type="module"></script>
   </body>
 </html>
