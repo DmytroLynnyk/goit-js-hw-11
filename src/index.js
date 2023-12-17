@@ -13,7 +13,7 @@ const queryParams = {
   image_type: 'photo',
   orientation: 'horizontal',
   safesearch: 'true',
-  per_page: 40,
+  per_page: 100,
 };
 
 form.addEventListener('submit', onSubmit);
@@ -34,11 +34,6 @@ async function onSubmit(event) {
         gallery.innerHTML = '';
       } else {
         renderGallery(data);
-        if (page < data.totalHits / data.hits.length) {
-          loadMore.classList.replace('load-more-hidden', 'load-more');
-        } else {
-          loadMore.classList.replace('load-more', 'load-more-hidden');
-        }
       }
     })
     .catch(
@@ -102,5 +97,10 @@ function onLoadMore() {
   page += 1;
   fetchQuery(query, page).then(({ data }) => {
     galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+    if (page > data.totalHits / data.hits.length) {
+      loadMore.classList.replace('load-more', 'load-more-hidden');
+    } else {
+      loadMore.classList.replace('load-more-hidden', 'load-more');
+    }
   });
 }
