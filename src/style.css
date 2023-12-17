@@ -36,24 +36,22 @@ button {
 /* Reset end */
 
 .header {
-    height: 80px;
     padding: 20px 0;
-    background-color: rgb(37, 37, 169);
+    background-color: rgb(77, 97, 182);
 }
 
 .search-form  {
     width: 400px;
-   display: flex;
-   margin: 0 auto;
-   position: relative;
+    display: flex;
+    margin: 0 auto;
+    position: relative;
 }
 
 .search-form input {
     width: 100%;
     height: 32px;
-
-   border-style: none;
-   border-radius: 4px;
+    border-style: none;
+    border-radius: 4px;
 
     outline: none;
 }
@@ -65,4 +63,59 @@ button {
     position: absolute;
     right: 0px;
     border-radius: 4px;
+}
+
+.load-more { 
+    display: block;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(60, 78, 160);        
+    margin: 20 auto;
+    padding: 12px;
+    border-style: none;
+    border-radius: 4px;
+}
+
+.load-more-hidden {
+    display: none;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.photo-card {
+    border: 1px solid transparent;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0px 1px 5px gray;
+}
+
+.card-image {
+    object-fit: cover;
+    width: 390px;
+    height: 210px;
+}
+
+.info {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 10px;
+}
+
+.info-item b {
+    margin-bottom: 8px;
 }

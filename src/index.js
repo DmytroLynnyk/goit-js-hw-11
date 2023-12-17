@@ -1,87 +1,106 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+// import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const paraments = {
+const form = document.querySelector('.search-form');
+const galleryList = document.querySelector('.gallery');
+const loadMore = document.querySelector('.load-more');
+let page = 1;
+let query = '';
+
+const queryParams = {
   image_type: 'photo',
   orientation: 'horizontal',
   safesearch: 'true',
+  per_page: 40,
 };
-let query = '';
-
-Notiflix.Notify.init({
-  position: 'top-right',
-  timeout: 3000,
-});
-
-const MAIN_URL = 'https://pixabay.com/api/';
-const KEY = '41296816-66b158bf0945ebd5221c62d2d';
-const gallery = document.querySelector('.gallery');
-const form = document.querySelector('.search-form');
 
 form.addEventListener('submit', onSubmit);
+loadMore.addEventListener('click', onLoadMore);
 
 async function onSubmit(event) {
   event.preventDefault();
-  gallery.innerHTML = '';
+  galleryList.innerHTML = '';
   query = '';
+  page = 1;
 
   query = event.target.searchQuery.value.toLowerCase();
 
-  await fetchQuery(query)
-    .then(response => {
-      createGallery(response);
+  fetchQuery(query, page)
+    .then(({ data }) => {
+      if (!data.total) {
+        form.reset();
+        gallery.innerHTML = '';
+      } else {
+        renderGallery(data);
+        if (page < data.totalHits / data.hits.length) {
+          loadMore.classList.replace('load-more-hidden', 'load-more');
+        } else {
+          loadMore.classList.replace('load-more', 'load-more-hidden');
+        }
+      }
     })
-    .catch(error => console.log(error));
+    .catch(
+      error =>
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        ),
+      loadMore.classList.replace('load-more', 'load-more-hidden')
+    );
 }
 
-async function fetchQuery(response) {
+function renderGallery(data) {
+  galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+  loadMore.classList.replace('load-more-hidden', 'load-more');
+  Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+}
+
+async function fetchQuery(query, page) {
+  const BASE_URL = 'https://pixabay.com/api/';
+  const API_KEY = '41296816-66b158bf0945ebd5221c62d2d';
+
   const instance = await axios(
-    `${MAIN_URL}?key=${KEY}&q=${query}&image_type=${paraments.image_type}&orientation=${paraments.orientation}&safesearch=${paraments.safesearch}`
+    `${BASE_URL}?key=${API_KEY}&q=${query}&image_type=${queryParams.image_type}&orientation=${queryParams.orientation}&safesearch=${queryParams.safesearch}&per_page=${queryParams.per_page}&page=${page}`
   );
   return instance;
 }
 
-function createGallery(response) {
-  if (!response.data.total) {
-    form.reset();
-    gallery.innerHTML = '';
-    Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-  } else {
-    renderGallery(response.data);
-  }
-}
-
-function renderGallery({ hits, totalHits }) {
-  const result = hits
-    .map(item => {
-      return `<div class="photo-card">
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ webformatURL, tags, likes, views, comments, downloads }) =>
+        `
+      <div class="photo-card">
          <img
-         src="${item.webformatURL}"
-         alt="${item.tags}"
+         src="${webformatURL}"
+         alt="${tags}"
          loading="lazy"
          class="card-image"
          />
          <div class="info">
             <p class="info-item">
-              <b>Likes</b>${item.likes}
+              <b>Likes</b>${likes}
             </p>
             <p class="info-item">
-              <b>Views</b>${item.views}
+              <b>Views</b>${views}
             </p>
             <p class="info-item">
-             <b>Comments</b>${item.comments}
+             <b>Comments</b>${comments}
             </p>
             <p class="info-item">
-             <b>Downloads</b>${item.downloads}
+             <b>Downloads</b>${downloads}
             </p>
       </div>
-    </div>`;
-    })
+    </div>
+    `
+    )
     .join('');
-  gallery.insertAdjacentHTML('beforeend', result);
-  Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+}
+
+function onLoadMore() {
+  page += 1;
+  fetchQuery(query, page).then(({ data }) => {
+    galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+  });
 }
