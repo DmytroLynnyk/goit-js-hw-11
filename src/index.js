@@ -31,7 +31,7 @@ async function onSubmit(event) {
 
   await fetchQuery(query)
     .then(response => {
-      renderGallery(response);
+      createGallery(response);
     })
     .catch(error => console.log(error));
 }
@@ -41,4 +41,47 @@ async function fetchQuery(response) {
     `${MAIN_URL}?key=${KEY}&q=${query}&image_type=${paraments.image_type}&orientation=${paraments.orientation}&safesearch=${paraments.safesearch}`
   );
   return instance;
+}
+
+function createGallery(response) {
+  if (!response.data.total) {
+    form.reset();
+    gallery.innerHTML = '';
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+  } else {
+    renderGallery(response.data);
+  }
+}
+
+function renderGallery({ hits, totalHits }) {
+  const result = hits
+    .map(item => {
+      return `<div class="photo-card">
+         <img
+         src="${item.webformatURL}"
+         alt="${item.tags}"
+         loading="lazy"
+         class="card-image"
+         />
+         <div class="info">
+            <p class="info-item">
+              <b>Likes</b>${item.likes}
+            </p>
+            <p class="info-item">
+              <b>Views</b>${item.views}
+            </p>
+            <p class="info-item">
+             <b>Comments</b>${item.comments}
+            </p>
+            <p class="info-item">
+             <b>Downloads</b>${item.downloads}
+            </p>
+      </div>
+    </div>`;
+    })
+    .join('');
+  gallery.insertAdjacentHTML('beforeend', result);
+  Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
 }
