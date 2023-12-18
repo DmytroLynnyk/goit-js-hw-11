@@ -104,16 +104,16 @@ function onLoadMore() {
   page += 1;
   fetchQuery(query, page).then(({ data }) => {
     galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-    console.log('page', page);
-    console.log('data.hits.length', data.hits.length);
-    console.log('data.totalHits', data.totalHits);
+    // console.log('page', page);
+    // console.log('data.hits.length', data.hits.length);
+    // console.log('data.totalHits', data.totalHits);
 
-    console.log('queryParams.per_page', queryParams.per_page);
-    console.log(
-      '(data.totalHits / queryParams.per_page)',
-      data.totalHits / queryParams.per_page
-    );
-    console.log('Math.ceil', Math.ceil(data.totalHits / queryParams.per_page));
+    // console.log('queryParams.per_page', queryParams.per_page);
+    // console.log(
+    //   '(data.totalHits / queryParams.per_page)',
+    //   data.totalHits / queryParams.per_page
+    // );
+    // console.log('Math.ceil', Math.ceil(data.totalHits / queryParams.per_page));
 
     if (page >= Math.ceil(data.totalHits / queryParams.per_page)) {
       loadMore.classList.replace('load-more', 'load-more-hidden');
