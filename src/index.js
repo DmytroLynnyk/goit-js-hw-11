@@ -97,7 +97,7 @@ function onLoadMore() {
   page += 1;
   fetchQuery(query, page).then(({ data }) => {
     galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-    if (page > data.totalHits / data.hits.length) {
+    if ((page = Math.round(data.totalHits / data.hits.length))) {
       loadMore.classList.replace('load-more', 'load-more-hidden');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
