@@ -39,6 +39,11 @@ button {
     padding: 20px 0;
     background-color: rgb(77, 97, 182);
     margin-bottom: 20px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
 }
 
 .search-form  {
