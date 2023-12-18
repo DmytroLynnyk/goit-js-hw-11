@@ -13,7 +13,7 @@ const queryParams = {
   image_type: 'photo',
   orientation: 'horizontal',
   safesearch: 'true',
-  per_page: 40,
+  per_page: 100,
 };
 
 form.addEventListener('submit', onSubmit);
@@ -99,6 +99,9 @@ function onLoadMore() {
     galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
     if (page > data.totalHits / data.hits.length) {
       loadMore.classList.replace('load-more', 'load-more-hidden');
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
     } else {
       loadMore.classList.replace('load-more-hidden', 'load-more');
     }
