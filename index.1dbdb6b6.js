@@ -21,5 +21,5 @@ function t(t){return t&&t.__esModule?t.default:t}var e,i,n,o,r,a,s,l,c="undefine
             </p>
       </div>
     </div>
-    `).join("")}eX.addEventListener("submit",eG),e$.addEventListener("click",function(){eq+=1,eY(eV,eq).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eQ(e.hits)),console.log("page",eq),console.log("data.hits.length",e.hits.length),console.log("data.totalHits",e.totalHits),console.log("queryParams.per_page",eJ.per_page),console.log("(data.totalHits / queryParams.per_page)",e.totalHits/eJ.per_page),console.log("Math.ceil",Math.ceil(e.totalHits/eJ.per_page)),eq>=Math.ceil(e.totalHits/eJ.per_page)?(e$.classList.replace("load-more","load-more-hidden"),t(e_).Notify.info("We're sorry, but you've reached the end of search results.")):e$.classList.replace("load-more-hidden","load-more")})});
-//# sourceMappingURL=index.27422192.js.map
+    `).join("")}eX.addEventListener("submit",eG),e$.addEventListener("click",function(){eq+=1,eY(eV,eq).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eQ(e.hits)),eq>=Math.ceil(e.totalHits/eJ.per_page)?(e$.classList.replace("load-more","load-more-hidden"),t(e_).Notify.info("We're sorry, but you've reached the end of search results.")):e$.classList.replace("load-more-hidden","load-more")})});
+//# sourceMappingURL=index.1dbdb6b6.js.map
