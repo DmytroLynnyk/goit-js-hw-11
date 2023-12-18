@@ -32,7 +32,7 @@ async function onSubmit(event) {
       if (!data.total) {
         form.reset();
         gallery.innerHTML = '';
-      } else if (page >= Math.ceil(data.totalHits / data.hits.length)) {
+      } else if (page >= Math.ceil(data.totalHits / queryParams.per_page)) {
         renderGallery(data);
         loadMore.classList.replace('load-more', 'load-more-hidden');
         Notiflix.Notify.info(
