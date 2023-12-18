@@ -32,8 +32,15 @@ async function onSubmit(event) {
       if (!data.total) {
         form.reset();
         gallery.innerHTML = '';
+      } else if (page >= Math.ceil(data.totalHits / data.hits.length)) {
+        renderGallery(data);
+        loadMore.classList.replace('load-more', 'load-more-hidden');
+        Notiflix.Notify.info(
+          "We're sorry, but you've reached the end of search results."
+        );
       } else {
         renderGallery(data);
+        loadMore.classList.replace('load-more-hidden', 'load-more');
       }
     })
     .catch(
@@ -97,7 +104,18 @@ function onLoadMore() {
   page += 1;
   fetchQuery(query, page).then(({ data }) => {
     galleryList.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-    if ((page = Math.round(data.totalHits / data.hits.length))) {
+    console.log('page', page);
+    console.log('data.hits.length', data.hits.length);
+    console.log('data.totalHits', data.totalHits);
+
+    console.log('queryParams.per_page', queryParams.per_page);
+    console.log(
+      '(data.totalHits / queryParams.per_page)',
+      data.totalHits / queryParams.per_page
+    );
+    console.log('Math.ceil', Math.ceil(data.totalHits / queryParams.per_page));
+
+    if (page >= Math.ceil(data.totalHits / queryParams.per_page)) {
       loadMore.classList.replace('load-more', 'load-more-hidden');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
