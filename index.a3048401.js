@@ -21,5 +21,5 @@
             </p>
       </div>
     </div>
-    `).join("")}e_.addEventListener("submit",eJ),eq.addEventListener("click",function(){e$+=1,eG(eV,e$).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eK(e.hits)),e$>e.totalHits/e.hits.length?(eq.classList.replace("load-more","load-more-hidden"),t(eX).Notify.info("We're sorry, but you've reached the end of search results.")):eq.classList.replace("load-more-hidden","load-more")})})}();
-//# sourceMappingURL=index.da3ee005.js.map
+    `).join("")}e_.addEventListener("submit",eJ),eq.addEventListener("click",function(){e$+=1,eG(eV,e$).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eK(e.hits)),(e$=Math.round(e.totalHits/e.hits.length))?(eq.classList.replace("load-more","load-more-hidden"),t(eX).Notify.info("We're sorry, but you've reached the end of search results.")):eq.classList.replace("load-more-hidden","load-more")})})}();
+//# sourceMappingURL=index.a3048401.js.map

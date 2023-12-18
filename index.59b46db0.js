@@ -21,5 +21,5 @@ function t(t){return t&&t.__esModule?t.default:t}var e,i,n,o,r,a,s,l,c="undefine
             </p>
       </div>
     </div>
-    `).join("")}e_.addEventListener("submit",eJ),eq.addEventListener("click",function(){e$+=1,eG(eV,e$).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eK(e.hits)),e$>e.totalHits/e.hits.length?(eq.classList.replace("load-more","load-more-hidden"),t(eX).Notify.info("We're sorry, but you've reached the end of search results.")):eq.classList.replace("load-more-hidden","load-more")})});
-//# sourceMappingURL=index.323505e2.js.map
+    `).join("")}e_.addEventListener("submit",eJ),eq.addEventListener("click",function(){e$+=1,eG(eV,e$).then(({data:e})=>{eH.insertAdjacentHTML("beforeend",eK(e.hits)),(e$=Math.round(e.totalHits/e.hits.length))?(eq.classList.replace("load-more","load-more-hidden"),t(eX).Notify.info("We're sorry, but you've reached the end of search results.")):eq.classList.replace("load-more-hidden","load-more")})});
+//# sourceMappingURL=index.59b46db0.js.map
